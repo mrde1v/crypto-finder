@@ -28,6 +28,9 @@ func worker(phraseChan chan string, wg *sync.WaitGroup) {
 
 	for phrase := range phraseChan {
 		masterKey := getSeed(phrase)
+		if masterKey == nil {
+			continue
+		}
 		checkBitcoinBalance(masterKey, phrase)
 	}
 }
